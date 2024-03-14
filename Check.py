@@ -591,8 +591,171 @@ def Start(input1, input2, html_report_path ):
         html5 += "</table>\n"      
         
 
+    from tridy import TwoPairs, Pairs
+    from lookUpTable import headers_connection
+    inE = '12513810506V00.xlsx'
+    inE1 = '12513810506V01.xlsx'
+
+
+    doc = pd.read_excel(inE, sheet_name='connection_list',header=5)
+    doc1 = pd.read_excel(inE1, sheet_name='connection_list',header=5)
+    TwoPairs.extractFromExcel(doc=doc, var="old")
+    TwoPairs.extractFromExcel(doc=doc1, var="new")
+    Pairs.compareFullMatch(TwoPairs.twoPairs_old, TwoPairs.twoPairs_new)
+    #Pairs.printFullMatchPairs()
+    Pairs.checking()
+    
+    html11 = "<table id='table11'>"   
+    html11 += "<tr>\n"
+
+    
+    for j, prop in enumerate(headers_connection):
+        html11 +=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+                
+    html11+= "</tr>\n"   
+    for i, item in enumerate((Pairs.fullMatch)):
+        html11 += "<tr>\n"
+        html11 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        html11 +=f"<th class='matchId'>{item[0].startDevice}</th>\n"
+        html11 +=f"<th class='matchId'>{item[0].startPin}</th>\n"            
+        html11 +=f"<th class='matchId'>{item[0].endDevice}</th>\n"
+        html11 +=f"<th class='matchId'>{item[0].endPin}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][0]}>{item[0].data[0]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][1]}>{item[0].data[1]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][2]}>{item[0].data[2]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][3]}>{item[0].data[3]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][4]}>{item[0].data[4]}</th>\n"
+        html11+= "</tr>\n"
+        html11 += "<tr>\n"
+        html11 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html11 +=f"<th class='matchId'>{item[1].startDevice}</th>\n"
+        html11 +=f"<th class='matchId'>{item[1].startPin}</th>\n"            
+        html11 +=f"<th class='matchId'>{item[1].endDevice}</th>\n"
+        html11 +=f"<th class='matchId'>{item[1].endPin}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][0]}>{item[1].data[0]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][1]}>{item[1].data[1]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][2]}>{item[1].data[2]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][3]}>{item[1].data[3]}</th>\n"
+        html11 +=f"<th class={Pairs.fullMatchDataCheck[i][4]}>{item[1].data[4]}</th>\n"
+        html11+= "</tr>\n"
+        html11 += "<tr>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11 +=f"<th id='space'></th>\n"
+        html11+= "</tr>\n"
+
+    html11 += "</table id='table11'>\n"       
+      
+
+
+    html12 = "<table id='table12'>"   
+    html12 += "<tr>\n"
+    
+    for j, prop in enumerate(headers_connection):
+        html12 +=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+                
+    html12+= "</tr>\n"   
+    for i, item in enumerate((Pairs.startDevMatch)):
+        html12 += "<tr>\n"
+        html12 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        html12 +=f"<th class='matchId'>{item[0].startDevice}</th>\n"
+        html12 +=f"<th class=''>{item[0].startPin}</th>\n"            
+        html12 +=f"<th class=''>{item[0].endDevice}</th>\n"
+        html12 +=f"<th class=''>{item[0].endPin}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][0]}>{item[0].data[0]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][1]}>{item[0].data[1]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][2]}>{item[0].data[2]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][3]}>{item[0].data[3]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][4]}>{item[0].data[4]}</th>\n"
+        html12+= "</tr>\n"
+        html12 += "<tr>\n"
+        html12 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html12 +=f"<th class='matchId'>{item[1].startDevice}</th>\n"
+        html12 +=f"<th class=''>{item[1].startPin}</th>\n"            
+        html12 +=f"<th class=''>{item[1].endDevice}</th>\n"
+        html12 +=f"<th class=''>{item[1].endPin}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][0]}>{item[1].data[0]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][1]}>{item[1].data[1]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][2]}>{item[1].data[2]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][3]}>{item[1].data[3]}</th>\n"
+        html12 +=f"<th class={Pairs.startDevMatchCheck[i][4]}>{item[1].data[4]}</th>\n"
+        html12+= "</tr>\n"
+        html12 += "<tr>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12 +=f"<th id='space'></th>\n"
+        html12+= "</tr>\n"
+
+    html12 += "</table>\n"       
+      
+    
+
+    
+    html13 = "<table id='table13'>"   
+    html13 += "<tr>\n"
+
+    
+    for j, prop in enumerate(headers_connection):
+        html13 +=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+                
+    html13+= "</tr>\n"   
+    for i, item in enumerate((Pairs.noMatch)):
+        html13 += "<tr>\n"
+        html13 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        html13 +=f"<th>{item[0].startDevice}</th>\n"
+        html13 +=f"<th>{item[0].startPin}</th>\n"            
+        html13 +=f"<th>{item[0].endDevice}</th>\n"
+        html13 +=f"<th>{item[0].endPin}</th>\n"
+        html13 +=f"<th>{item[0].data[0]}</th>\n"
+        html13 +=f"<th>{item[0].data[1]}</th>\n"
+        html13 +=f"<th>{item[0].data[2]}</th>\n"
+        html13 +=f"<th>{item[0].data[3]}</th>\n"
+        html13 +=f"<th>{item[0].data[4]}</th>\n"
+        html13+= "</tr>\n"
+    html13 += "<tr>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13 +=f"<th id='space'></th>\n"
+    html13+= "</tr>\n"
+    for i, item in enumerate((Pairs.noMatch)):
+        html13 += "<tr>\n"
+        html13 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html13 +=f"<th>{item[1].startDevice}</th>\n"
+        html13 +=f"<th>{item[1].startPin}</th>\n"            
+        html13 +=f"<th>{item[1].endDevice}</th>\n"
+        html13 +=f"<th>{item[1].endPin}</th>\n"
+        html13 +=f"<th>{item[1].data[0]}</th>\n"
+        html13 +=f"<th>{item[1].data[1]}</th>\n"
+        html13 +=f"<th>{item[1].data[2]}</th>\n"
+        html13 +=f"<th>{item[1].data[3]}</th>\n"
+        html13 +=f"<th>{item[1].data[4]}</th>\n"
+        html13+= "</tr>\n"
+    html13 += "</table>\n"        
       
       
+      
+    
 
     html_main = f"""
     <!DOCTYPE html>
@@ -811,6 +974,7 @@ def Start(input1, input2, html_report_path ):
         </div>
         <div id='modal'></div>
         <h1 class='LANG' data-lang-values={json.dumps(title)}></h1>
+ 
         <div  id=menuWrapper>
             <div id="language_bar">                
                 <img id=flag_image>
@@ -818,8 +982,8 @@ def Start(input1, input2, html_report_path ):
             </div>
 
             <div> 
-            <p id='input'  data-input='{input1_name}' class='LANG' data-lang-values={json.dumps(old_version)}></p> 
-            <p id='input'  data-input='{input2_name}' class='LANG' data-lang-values={json.dumps(new_version)}></p> 
+                <p id='input'  data-input='{input1_name}' class='LANG' data-lang-values={json.dumps(old_version)}></p> 
+                <p id='input'  data-input='{input2_name}' class='LANG' data-lang-values={json.dumps(new_version)}></p> 
             </div>
 
             <div id="search_wrapper">
@@ -834,39 +998,50 @@ def Start(input1, input2, html_report_path ):
         <br>
         <hr>
         <br>
-        <div id="show_only_wrapper"> 
-        
-            <button id="Show Errors" class='LANG' data-lang-values={json.dumps(show_error)}></button>
-            <button id="transfer_ID_UN"  class='LANG' data-lang-values= {json.dumps(transfer_to_id_and_unique_translations)}></button>
-            <button id="transfer_UN"  class='LANG' data-lang-values= {json.dumps(transfer_to_unique_translations )}></button>
-            <button id="transfer_ID"  class='LANG' data-lang-values= {json.dumps( transfer_to_indentation_translations)}></button>
-            <button id="transfer_DUPLICATES"  class='LANG' data-lang-values={json.dumps( transfer_to_duplicates_translations)} ></button>
-            <button id="transfer_notFound"  class='LANG' data-lang-values={json.dumps(transfer_to_not_found_translations)} ></button>
-        </div>
-        <br>
-        <hr>
-        <h2 for='table1' class='LANG' data-lang-values={json.dumps(UNIQandIND)}></h2>
-        {html}
-        <br>
-        <hr>
-        <h2 for='table2' class='LANG' data-lang-values= {json.dumps(UNIQmatch)}></h2>
-        {html2}
-        <br>
-        <hr>
-        <h2 for='table3'class='LANG' data-lang-values={json.dumps(INDmatch)}></h2>
-        {html3}
-        <br>
-        <hr>
-        <h2 for='table4' class='LANG' data-lang-values={json.dumps(DUPLICATES_mark)}></h2>
-        {html4}
-        <br>
-        <hr>
-        <h2 for='table5' class='LANG' data-lang-values={json.dumps(Notfound)}></h2>
-        {html5}
-
-
+            <div id="show_only_wrapper"> 
+                <button id="Show Errors" class='LANG' data-lang-values={json.dumps(show_error)}></button>
+                <button id="transfer_ID_UN"  class='LANG' data-lang-values= {json.dumps(transfer_to_id_and_unique_translations)}></button>
+                <button id="transfer_UN"  class='LANG' data-lang-values= {json.dumps(transfer_to_unique_translations )}></button>
+                <button id="transfer_ID"  class='LANG' data-lang-values= {json.dumps( transfer_to_indentation_translations)}></button>
+                <button id="transfer_DUPLICATES"  class='LANG' data-lang-values={json.dumps( transfer_to_duplicates_translations)} ></button>
+                <button id="transfer_notFound"  class='LANG' data-lang-values={json.dumps(transfer_to_not_found_translations)} ></button>
+            </div>
+            <br>
+            <hr>
+            <br>
+            <h2 for='table11'>Connection list - Full match </h2>
+            {html11}
+            <br>
+            <hr>  
+            <br>
+            <h2 for='table12'>Connection list - Starting Device match</h2>
+            {html12}
+            <br>
+            <hr>  
+            <br>
+            <h2 for='table12'>Connection list - Unmatched Values</h2>
+            {html13}
+            <br>
+            <hr> 
+            <h2 for='table1' class='LANG' data-lang-values={json.dumps(UNIQandIND)}></h2>
+            {html}
+            <br>
+            <hr>
+            <h2 for='table2' class='LANG' data-lang-values= {json.dumps(UNIQmatch)}></h2>
+            {html2}
+            <br>
+            <hr>
+            <h2 for='table3'class='LANG' data-lang-values={json.dumps(INDmatch)}></h2>
+            {html3}
+            <br>
+            <hr>
+            <h2 for='table4' class='LANG' data-lang-values={json.dumps(DUPLICATES_mark)}></h2>
+            {html4}
+            <br>
+            <hr>
+            <h2 for='table5' class='LANG' data-lang-values={json.dumps(Notfound)}></h2>
+            {html5}
     </body>
-    
     <script>
                 let highlight = null;
                 function getSelectedLanguage() {{
@@ -1079,6 +1254,8 @@ def Start(input1, input2, html_report_path ):
                         
                         
                 }})
+                
+                
     </script>
     </html>
 

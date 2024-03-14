@@ -14,6 +14,21 @@ headers = ["{'en': 'pos.-no.', 'fr': 'Pos. No.', 'it': 'N° pos.', 'pt': 'Númer
 "{'en': 'supplier', 'fr': 'fournisseur/fournisseurs /distributeur/prestataire', 'it': 'fornitore', 'pt': 'fornecedor', 'zh': '供应商', 'nl': 'Leverancier', 'es': 'equipamiento original', 'cs': 'Dodavatel', 'de': 'Lieferant'}",
 "{'en': 'supplier material', 'fr': 'matériel du fournisseur', 'it': 'Materiale da Fornitore', 'pt': 'material do fornecedor', 'zh': '供应商材料', 'nl': 'leveranciersmateriaal', 'es': 'Materia prima del proveedor', 'cs': 'Dovávaný materiál', 'de': 'Lieferantenmaterial'}"]
 
+
+headers_connection = [
+    "{'en': 'Origin', 'fr': 'Origine', 'it': 'Origine', 'pt': 'Origem', 'zh': '原始内容', 'nl': 'Oorsprong', 'es': 'Origen', 'cs': 'Zdroj',  'de': 'Ursprung'}",
+    "{'en': 'starting device', 'fr': 'dispositif de démarrage', 'it': 'dispositivo di avvio', 'pt': 'dispositivo de partida', 'zh': '起动装置', 'nl': 'startapparaat', 'es': 'dispositivo de inicio','cs': 'startotavi zarizeni', 'de': 'Startgerät'}",
+    "{'en' : 'Pin', 'fr': 'broche de démarrage', 'it': 'pin di avvio', 'pt': 'pino de partida', 'zh': '起动引脚', 'nl': 'startpin', 'es': 'pin de inicio', 'cs': 'startovací pin', 'de': 'Start-Pin'}",
+    "{'en': 'ending device', 'fr': 'dispositif de fin', 'it': 'dispositivo di fine', 'pt': 'dispositivo de término', 'zh': '结束设备', 'nl': 'eindapparaat', 'es': 'dispositivo final', 'cs': 'koncové zařízení', 'de': 'Endgerät'}",
+    "{'en' : 'Pin', 'fr': 'broche de démarrage', 'it': 'pin di avvio', 'pt': 'pino de partida', 'zh': '起动引脚', 'nl': 'startpin', 'es': 'pin de inicio', 'cs': 'startovací pin', 'de': 'Start-Pin'}",
+    "{'en': 'signal', 'fr': 'signal', 'it': 'segnale', 'pt': 'sinal', 'zh': '信号', 'nl': 'signaal', 'es': 'señal', 'cs': 'signál', 'de': 'Signal'}",
+    "{'en': 'cross-sec. (mm²)', 'fr': 'cross-sec. (mm²)', 'it': 'cross-sec. (mm²)', 'pt': 'cross-sec. (mm²)', 'zh': '交叉秒针(mm ²)', 'nl': 'cross-sec. (mm²)', 'es': 'seg. transversal (mm²)', 'cs': 'Průřez v (mm²)', 'de': 'Querschnitt (mm²)'}",
+    "{'en': 'color', 'fr': 'couleur', 'it': 'colore', 'pt': 'cor', 'zh': '彩色', 'nl': 'kleur', 'es': 'color', 'cs': 'Barva',  'de': 'Farbe'}",
+    "{'en': 'type', 'fr': 'type', 'it': 'tipo', 'pt': 'tipo', 'zh': '类型', 'nl': 'type', 'es': 'tipo', 'cs': 'typ', 'de': 'Typ'}",
+    "{'en': 'ident number', 'fr': 'numéro didentification', 'it': 'numero identificativo', 'pt': 'número de identificação', 'zh': '身份证号码', 'nl': 'identificatienummer', 'es': 'número de identificación', 'cs': 'identifikacni cislo', 'de': 'Identnummer'}"
+    
+
+]
 indent = "{'en': 'Indent','fr': 'Indentation','it': 'Rientro','pt': 'Indentação','zh': '缩进','nl': 'Inspringen','es': 'Sangría','cs': 'Odsazení', 'de' :'Einzug' }"
 uniq_device = "{'en': 'Unique device id','fr': 'Identifiant unique du dispositif', 'it': 'ID dispositivo unico', 'pt': 'ID de dispositivo único', 'zh': '唯一设备标识', 'nl': 'Unieke apparaat-ID', 'es': 'ID único del dispositivo', 'cs': 'Jedinečný identifikátor zařízení',  'de': 'Eindeutige Gerätekennung'}"
 
