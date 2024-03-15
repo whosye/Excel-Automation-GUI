@@ -593,8 +593,8 @@ def Start(input1, input2, html_report_path ):
 
     from tridy import TwoPairs, Pairs
     from lookUpTable import headers_connection
-    inE = '12513810506V00.xlsx'
-    inE1 = '12513810506V01.xlsx'
+    inE = input1
+    inE1 = input2
 
 
     doc = pd.read_excel(inE, sheet_name='connection_list',header=5)
@@ -615,11 +615,16 @@ def Start(input1, input2, html_report_path ):
     html11+= "</tr>\n"   
     for i, item in enumerate((Pairs.fullMatch)):
         html11 += "<tr>\n"
-        html11 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        html11 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # OLD
+        boolVar,boolVar1= True, True
+        if str(item[0].startPin) != str(item[1].startPin):
+            boolVar = False
+        if str(item[0].endPin) != str(item[1].endPin):
+            boolVar1 = False
         html11 +=f"<th class='matchId'>{item[0].startDevice}</th>\n"
-        html11 +=f"<th class='matchId'>{item[0].startPin}</th>\n"            
+        html11 +=f"<th class={boolVar}>{item[0].startPin}</th>\n"            
         html11 +=f"<th class='matchId'>{item[0].endDevice}</th>\n"
-        html11 +=f"<th class='matchId'>{item[0].endPin}</th>\n"
+        html11 +=f"<th class={boolVar1}>{item[0].endPin}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][0]}>{item[0].data[0]}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][1]}>{item[0].data[1]}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][2]}>{item[0].data[2]}</th>\n"
@@ -627,11 +632,11 @@ def Start(input1, input2, html_report_path ):
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][4]}>{item[0].data[4]}</th>\n"
         html11+= "</tr>\n"
         html11 += "<tr>\n"
-        html11 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html11 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # NEW 
         html11 +=f"<th class='matchId'>{item[1].startDevice}</th>\n"
-        html11 +=f"<th class='matchId'>{item[1].startPin}</th>\n"            
+        html11 +=f"<th class={boolVar}>{item[1].startPin}</th>\n"            
         html11 +=f"<th class='matchId'>{item[1].endDevice}</th>\n"
-        html11 +=f"<th class='matchId'>{item[1].endPin}</th>\n"
+        html11 +=f"<th class={boolVar1}>{item[1].endPin}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][0]}>{item[1].data[0]}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][1]}>{item[1].data[1]}</th>\n"
         html11 +=f"<th class={Pairs.fullMatchDataCheck[i][2]}>{item[1].data[2]}</th>\n"
@@ -665,10 +670,15 @@ def Start(input1, input2, html_report_path ):
     for i, item in enumerate((Pairs.startDevMatch)):
         html12 += "<tr>\n"
         html12 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        boolVar,boolVar1= True, True
+        if str(item[0].startPin) != str(item[1].startPin):
+            boolVar = False
+        if str(item[0].endPin) != str(item[1].endPin):
+            boolVar1 = False
         html12 +=f"<th class='matchId'>{item[0].startDevice}</th>\n"
-        html12 +=f"<th class=''>{item[0].startPin}</th>\n"            
+        html12 +=f"<th class={boolVar}>{item[0].startPin}</th>\n"            
         html12 +=f"<th class=''>{item[0].endDevice}</th>\n"
-        html12 +=f"<th class=''>{item[0].endPin}</th>\n"
+        html12 +=f"<th class={boolVar1}>{item[0].endPin}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][0]}>{item[0].data[0]}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][1]}>{item[0].data[1]}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][2]}>{item[0].data[2]}</th>\n"
@@ -678,9 +688,9 @@ def Start(input1, input2, html_report_path ):
         html12 += "<tr>\n"
         html12 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
         html12 +=f"<th class='matchId'>{item[1].startDevice}</th>\n"
-        html12 +=f"<th class=''>{item[1].startPin}</th>\n"            
+        html12 +=f"<th class={boolVar}>{item[1].startPin}</th>\n"            
         html12 +=f"<th class=''>{item[1].endDevice}</th>\n"
-        html12 +=f"<th class=''>{item[1].endPin}</th>\n"
+        html12 +=f"<th class={boolVar1}>{item[1].endPin}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][0]}>{item[1].data[0]}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][1]}>{item[1].data[1]}</th>\n"
         html12 +=f"<th class={Pairs.startDevMatchCheck[i][2]}>{item[1].data[2]}</th>\n"
@@ -700,10 +710,165 @@ def Start(input1, input2, html_report_path ):
         html12 +=f"<th id='space'></th>\n"
         html12+= "</tr>\n"
 
-    html12 += "</table>\n"       
+    html12+= "</table>\n"       
       
     
+    html121= "<table id='table121'>"   
+    html121+= "<tr>\n"
+    
+    for j, prop in enumerate(headers_connection):
+        html121+=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+                       
+                
+    html121+= "</tr>\n"   
+    for i, item in enumerate((Pairs.endDevMatch)):
+        html121+= "<tr>\n"
+        html121+=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        boolVar,boolVar1= True, True
+        if str(item[0].startPin) != str(item[1].startPin):
+            boolVar = False
+        if str(item[0].endPin) != str(item[1].endPin):
+            boolVar1 = False
+        html121+=f"<th class=''>{item[0].startDevice}</th>\n"
+        html121+=f"<th class={boolVar}>{item[0].startPin}</th>\n"            
+        html121+=f"<th class='matchId'>{item[0].endDevice}</th>\n"
+        html121+=f"<th class={boolVar1}>{item[0].endPin}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][0]}>{item[0].data[0]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][1]}>{item[0].data[1]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][2]}>{item[0].data[2]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][3]}>{item[0].data[3]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][4]}>{item[0].data[4]}</th>\n"
+        html121+= "</tr>\n"
+        html121+= "<tr>\n"
+        html121+=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html121+=f"<th class=''>{item[1].startDevice}</th>\n"
+        html121+=f"<th class={boolVar}>{item[1].startPin}</th>\n"            
+        html121+=f"<th class='matchId'>{item[1].endDevice}</th>\n"
+        html121+=f"<th class={boolVar1}>{item[1].endPin}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][0]}>{item[1].data[0]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][1]}>{item[1].data[1]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][2]}>{item[1].data[2]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][3]}>{item[1].data[3]}</th>\n"
+        html121+=f"<th class={Pairs.endDevMatchCheck[i][4]}>{item[1].data[4]}</th>\n"
+        html121+= "</tr>\n"
+        html121+= "<tr>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+=f"<th id='space'></th>\n"
+        html121+= "</tr>\n"
 
+    html121+= "</table>\n"     
+    
+    
+    
+    html131= "<table id='table131'>"   
+    html131+= "<tr>\n"
+    
+    for j, prop in enumerate(headers_connection):
+        html131+=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+                       
+                
+    html131+= "</tr>\n"   
+    for i, item in enumerate((Pairs.crossDevMatch2)):
+        html131+= "<tr>\n"
+        html131+=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+        html131+=f"<th class='matchId'>{item[0].startDevice}</th>\n"
+        boolVar,boolVar1= True, True
+        if str(item[0].startPin) != str(item[1].startPin):
+            boolVar = False
+        if str(item[0].endPin) != str(item[1].endPin):
+            boolVar1 = False
+        html131+=f"<th class={boolVar}>{item[0].startPin}</th>\n"            
+        html131+=f"<th class=''>{item[0].endDevice}</th>\n"
+        html131+=f"<th class={boolVar1}>{item[0].endPin}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][0]}>{item[0].data[0]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][1]}>{item[0].data[1]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][2]}>{item[0].data[2]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][3]}>{item[0].data[3]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][4]}>{item[0].data[4]}</th>\n"
+        html131+= "</tr>\n"
+        html131+= "<tr>\n"
+        boolVar = True
+        html131+=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+        html131+=f"<th class=''>{item[1].startDevice}</th>\n"
+        html131+=f"<th class={boolVar}>{item[1].startPin}</th>\n"            
+        html131+=f"<th class='matchId'>{item[1].endDevice}</th>\n"
+        html131+=f"<th class={boolVar1}>{item[1].endPin}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][0]}>{item[1].data[0]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][1]}>{item[1].data[1]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][2]}>{item[1].data[2]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][3]}>{item[1].data[3]}</th>\n"
+        html131+=f"<th class={Pairs.crossDevMatchCheck2[i][4]}>{item[1].data[4]}</th>\n"
+        html12+= "</tr>\n"
+        html131+= "<tr>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+=f"<th id='space'></th>\n"
+        html131+= "</tr>\n"
+    for i, item in enumerate((Pairs.crossDevMatch1)):
+            html131+= "<tr>\n"
+            html131+=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n" # OLD
+            boolVar,boolVar1= True, True
+            if str(item[0].startPin) != str(item[1].startPin):
+                boolVar = False
+            if str(item[0].endPin) != str(item[1].endPin):
+                boolVar1 = False
+            html131+=f"<th class=''>{item[0].startDevice}</th>\n"
+            html131+=f"<th class={boolVar}>{item[0].startPin}</th>\n"            
+            html131+=f"<th class='matchId'>{item[0].endDevice}</th>\n"
+            html131+=f"<th class={boolVar1}>{item[0].endPin}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][0]}>{item[0].data[0]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][1]}>{item[0].data[1]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][2]}>{item[0].data[2]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][3]}>{item[0].data[3]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][4]}>{item[0].data[4]}</th>\n"
+            html131+= "</tr>\n"
+            html131+= "<tr>\n"
+            html131+=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n" # NEW 
+            html131+=f"<th class='matchId'>{item[1].startDevice}</th>\n"
+            boolVar = True
+            html131+=f"<th class={boolVar}>{item[1].startPin}</th>\n"            
+            html131+=f"<th class=''>{item[1].endDevice}</th>\n"
+            html131+=f"<th class={boolVar1}>{item[1].endPin}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][0]}>{item[1].data[0]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][1]}>{item[1].data[1]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][2]}>{item[1].data[2]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][3]}>{item[1].data[3]}</th>\n"
+            html131+=f"<th class={Pairs.crossDevMatchCheck1[i][4]}>{item[1].data[4]}</th>\n"
+            html12+= "</tr>\n"
+            html131+= "<tr>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+=f"<th id='space'></th>\n"
+            html131+= "</tr>\n"
+
+
+
+
+    html131+= "</table>\n"     
+    
+    
     
     html13 = "<table id='table13'>"   
     html13 += "<tr>\n"
@@ -1016,6 +1181,16 @@ def Start(input1, input2, html_report_path ):
             <br>
             <h2 for='table12'>Connection list - Starting Device match</h2>
             {html12}
+            <br>
+            <hr>
+            <br>
+            <h2 for='table121'>Connection list - Ending Device match</h2>
+            {html121}
+            <br>
+            <hr>
+            <br>
+            <h2 for='table121'>Connection list - Ending Device match</h2>
+            {html131}
             <br>
             <hr>  
             <br>

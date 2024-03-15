@@ -20,7 +20,7 @@ headers_connection = [
     "{'en': 'starting device', 'fr': 'dispositif de démarrage', 'it': 'dispositivo di avvio', 'pt': 'dispositivo de partida', 'zh': '起动装置', 'nl': 'startapparaat', 'es': 'dispositivo de inicio','cs': 'startotavi zarizeni', 'de': 'Startgerät'}",
     "{'en' : 'Pin', 'fr': 'broche de démarrage', 'it': 'pin di avvio', 'pt': 'pino de partida', 'zh': '起动引脚', 'nl': 'startpin', 'es': 'pin de inicio', 'cs': 'startovací pin', 'de': 'Start-Pin'}",
     "{'en': 'ending device', 'fr': 'dispositif de fin', 'it': 'dispositivo di fine', 'pt': 'dispositivo de término', 'zh': '结束设备', 'nl': 'eindapparaat', 'es': 'dispositivo final', 'cs': 'koncové zařízení', 'de': 'Endgerät'}",
-    "{'en' : 'Pin', 'fr': 'broche de démarrage', 'it': 'pin di avvio', 'pt': 'pino de partida', 'zh': '起动引脚', 'nl': 'startpin', 'es': 'pin de inicio', 'cs': 'startovací pin', 'de': 'Start-Pin'}",
+    "{'en' : 'ending Pin', 'fr': 'broche de démarrage', 'it': 'pin di avvio', 'pt': 'pino de partida', 'zh': '起动引脚', 'nl': 'startpin', 'es': 'pin de inicio', 'cs': 'koncovy pin', 'de': 'ende-Pin'}",
     "{'en': 'signal', 'fr': 'signal', 'it': 'segnale', 'pt': 'sinal', 'zh': '信号', 'nl': 'signaal', 'es': 'señal', 'cs': 'signál', 'de': 'Signal'}",
     "{'en': 'cross-sec. (mm²)', 'fr': 'cross-sec. (mm²)', 'it': 'cross-sec. (mm²)', 'pt': 'cross-sec. (mm²)', 'zh': '交叉秒针(mm ²)', 'nl': 'cross-sec. (mm²)', 'es': 'seg. transversal (mm²)', 'cs': 'Průřez v (mm²)', 'de': 'Querschnitt (mm²)'}",
     "{'en': 'color', 'fr': 'couleur', 'it': 'colore', 'pt': 'cor', 'zh': '彩色', 'nl': 'kleur', 'es': 'color', 'cs': 'Barva',  'de': 'Farbe'}",

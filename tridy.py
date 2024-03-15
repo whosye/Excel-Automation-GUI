@@ -124,6 +124,12 @@ class Pairs:
     fullMatchDataCheck = []
     startDevMatch = []
     startDevMatchCheck = []
+    endDevMatch = []
+    endDevMatchCheck = []
+    crossDevMatch1 = []
+    crossDevMatchCheck1 = []
+    crossDevMatch2 = []
+    crossDevMatchCheck2 = []
     noMatch = []
     @classmethod
     def compareFullMatch(cls,oldList,newList):
@@ -137,11 +143,14 @@ class Pairs:
                 if itemNew in appended or itemOld in appended:
                     continue
                 else:
-                    if str(itemOld.startDevice)== str(itemNew.startDevice)  and str(itemOld.startPin) == str(itemNew.startPin) and str(itemOld.endDevice) == str(itemNew.endDevice) and str(itemOld.endPin) == str(itemNew.endPin):
-                        cls.fullMatch.append([itemOld, itemNew])
-                        appended.append(itemOld)
-                        appended.append(itemNew)
-                        continue
+                    if str(itemOld.startDevice)== str(itemNew.startDevice)  and str(itemOld.endDevice) == str(itemNew.endDevice):
+                        if "-SP" in itemOld.startDevice or "-SP" in itemNew.startDevice or "-SP" in itemNew.endDevice or "-SP" in itemOld.endDevice :
+                            continue
+                        else:
+                            cls.fullMatch.append([itemOld, itemNew])
+                            appended.append(itemOld)
+                            appended.append(itemNew)
+                            continue    
                 
         for item in cls.fullMatch: 
             oldList.remove(item[0])
@@ -154,14 +163,77 @@ class Pairs:
                     continue
                 else:
                     if str(itemOld.startDevice)== str(itemNew.startDevice):
-                        appended.append(itemOld)
-                        appended.append(itemNew)
-                        cls.startDevMatch.append([itemOld, itemNew])
-                        continue
+                        if "-SP" in itemOld.startDevice or "-SP" in itemNew.startDevice:
+                            continue
+                        else:
+                            
+                            appended.append(itemOld)
+                            appended.append(itemNew)
+                            cls.startDevMatch.append([itemOld, itemNew])
+                            continue
                 
         for item in cls.startDevMatch: 
             oldList.remove(item[0])
             newList.remove(item[1])
+            
+        appended = [] 
+        for itemOld in oldList: 
+            for itemNew in newList: 
+                if itemNew in appended or itemOld in appended:
+                    continue
+                else:
+                    if str(itemOld.endDevice)== str(itemNew.endDevice):
+                        if "-SP" in itemOld.endDevice or "-SP" in itemNew.endDevice:
+                            continue
+                        else:
+                            
+                            appended.append(itemOld)
+                            appended.append(itemNew)
+                            cls.endDevMatch.append([itemOld, itemNew])
+                            continue    
+        for item in cls.endDevMatch: 
+            oldList.remove(item[0])
+            newList.remove(item[1])       
+            
+    
+
+        appended = [] 
+        for itemOld in oldList: 
+            for itemNew in newList: 
+                if itemNew in appended or itemOld in appended:
+                    continue
+                else:
+                    if str(itemOld.endDevice)== str(itemNew.startDevice):
+                        if "-SP" in itemOld.endDevice or "-SP" in itemNew.startDevice:
+                            continue
+                        else:
+                            
+                            appended.append(itemOld)
+                            appended.append(itemNew)
+                            cls.crossDevMatch1.append([itemOld, itemNew])
+                            continue    
+        for item in cls.crossDevMatch1: 
+            oldList.remove(item[0])
+            newList.remove(item[1])  
+
+        appended = [] 
+        for itemOld in oldList: 
+            for itemNew in newList: 
+                if itemNew in appended or itemOld in appended:
+                    continue
+                else:
+                    if str(itemOld.startDevice)== str(itemNew.endDevice):
+                        if "-SP" in itemOld.startDevice or "-SP" in itemNew.endDevice:
+                            continue
+                        else:
+                            
+                            appended.append(itemOld)
+                            appended.append(itemNew)
+                            cls.crossDevMatch2.append([itemOld, itemNew])
+                            continue    
+        for item in cls.crossDevMatch2: 
+            oldList.remove(item[0])
+            newList.remove(item[1])          
             
         for item in zip(newList, oldList):
             new, old = item[0], item[1]
@@ -206,8 +278,64 @@ class Pairs:
                 if i == len(cls.startDevMatch)-1 and j == len(old.data)-1:
                     print("last")
                     cls.startDevMatchCheck.append(partialChecker)
-                    partialChecker = []                 
+                    partialChecker = []  
                     
+        for i,item in enumerate(cls.endDevMatch):
+            if i != 0:
+                cls.endDevMatchCheck.append(partialChecker)
+            partialChecker = [] # for one object 
+            old = item[0]
+            new = item[1]
+            
+            for j,info in enumerate((zip(old.data, new.data))):
+                old_info, new_info  = info[0], info[1]
+                if str( old_info) != str(new_info):
+                    partialChecker.append(False)
+                else:
+                    partialChecker.append(True)
+                    
+                if i == len(cls.endDevMatch)-1 and j == len(old.data)-1:
+                    print("last")
+                    cls.endDevMatchCheck.append(partialChecker)
+                    partialChecker = []       
+
+        for i,item in enumerate(cls.crossDevMatch1):
+            if i != 0:
+                cls.crossDevMatchCheck1.append(partialChecker)
+            partialChecker = [] # for one object 
+            old = item[0]
+            new = item[1]
+            
+            for j,info in enumerate((zip(old.data, new.data))):
+                old_info, new_info  = info[0], info[1]
+                if str( old_info) != str(new_info):
+                    partialChecker.append(False)
+                else:
+                    partialChecker.append(True)
+                    
+                if i == len(cls.crossDevMatch1)-1 and j == len(old.data)-1:
+                    print("last")
+                    cls.crossDevMatchCheck1.append(partialChecker)
+                    partialChecker = []             
+
+        for i,item in enumerate(cls.crossDevMatch2):
+            if i != 0:
+                cls.crossDevMatchCheck2.append(partialChecker)
+            partialChecker = [] # for one object 
+            old = item[0]
+            new = item[1]
+            
+            for j,info in enumerate((zip(old.data, new.data))):
+                old_info, new_info  = info[0], info[1]
+                if str( old_info) != str(new_info):
+                    partialChecker.append(False)
+                else:
+                    partialChecker.append(True)
+                    
+                if i == len(cls.crossDevMatch2)-1 and j == len(old.data)-1:
+                    print("last")
+                    cls.crossDevMatchCheck2.append(partialChecker)
+                    partialChecker = []                    
                     
                                      
     @classmethod
