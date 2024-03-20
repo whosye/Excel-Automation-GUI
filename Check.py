@@ -191,7 +191,7 @@ def Start(input1, input2, html_report_path ):
         from lookUpTable import headers, Origin_mark,OLD_mark,NEW_mark,ONLY_mark,Found_NEW_mark,Found_OLD_mark,DUPLICATES_mark,UNIQandIND,INDmatch,Nomatch,Notfound,title,Change,new_version
         from lookUpTable import old_version,search_mark,UNIQmatch,indent,uniq_device, show_error
         from lookUpTable import transfer_to_indentation_translations, transfer_to_duplicates_translations ,transfer_to_not_found_translations ,transfer_to_id_and_unique_translations ,transfer_to_unique_translations 
-    
+        from lookUpTable import connection_fullMatch, connection_crossDevice, connection_endDevice,connection_startDevice,connection_unmatched
     import json
     import re 
     pattern = r'[^/]+$'
@@ -1174,27 +1174,27 @@ def Start(input1, input2, html_report_path ):
             <br>
             <hr>
             <br>
-            <h2 for='table11'>Connection list - Full match </h2>
+            <h2 for='table11' class='LANG' data-lang-values={json.dumps(connection_fullMatch)}></h2>
             {html11}
             <br>
             <hr>  
             <br>
-            <h2 for='table12'>Connection list - Starting Device match</h2>
+            <h2 for='table12' class='LANG' data-lang-values={json.dumps(connection_startDevice)}></h2>
             {html12}
             <br>
             <hr>
             <br>
-            <h2 for='table121'>Connection list - Ending Device match</h2>
+            <h2 for='table121' class='LANG' data-lang-values={json.dumps(connection_endDevice)}></h2>
             {html121}
             <br>
             <hr>
             <br>
-            <h2 for='table121'>Connection list - Ending Device match</h2>
+            <h2 for='table131' class='LANG' data-lang-values={json.dumps(connection_crossDevice)}></h2>
             {html131}
             <br>
             <hr>  
             <br>
-            <h2 for='table12'>Connection list - Unmatched Values</h2>
+            <h2 for='table12' class='LANG' data-lang-values={json.dumps(connection_unmatched)}></h2>
             {html13}
             <br>
             <hr> 
