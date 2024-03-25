@@ -1,6 +1,9 @@
 
 
 
+from typing import Any
+
+
 def Start(input1, input2, html_report_path ):
 
     from main import HarvestData
@@ -11,7 +14,103 @@ def Start(input1, input2, html_report_path ):
 
     UniqAndIndent,UniqPairs,IndentPairs,LeftOVer1,LeftOVer2 ,duplicatePairsList = Output[0],Output[1], Output[2], Output[3], Output[4], Output[5]
 
+    #uniq_device_id   properties number[0] identnumber[0] description[0] additional[0] text[0] sipplioer[0] sipplier[0] material[0] 
+    class CustomPdf_uniqAndIndet:
+        customPdf = []
+        def __init__(self,unique, indent, wholeString, number):
+            self.unique = unique
+            self.indent =  indent 
+            self.number = number
+            self.wholeString = wholeString
+            CustomPdf_uniqAndIndet.customPdf.append(self)
+    keys = ['description','additional text','supplier','supplier material'] # Desired key from PDF 
+    for item in UniqAndIndent:
+
+        item = item.item2
+        itemString = "" 
+        number = str(item.properties['amount/\nlength'][0])
+        for key in keys:
+            itemString += str(item.properties[key][0])
+        CustomPdf_uniqAndIndet(unique=str(item.unique), indent=str(item.indent),number=number, wholeString=itemString)
+###########################################################################################################################        
+    class CustomPdf_uniq:
+        customPdf = []
+    def __init__(self,unique, indent, wholeString, number):
+        self.unique = unique
+        self.indent =  indent 
+        self.number = number
+        self.wholeString = wholeString
+        CustomPdf_uniq.customPdf.append(self)   
+   
+    for item in UniqPairs:
+        try:
+            item = item.item2
+        except:
+            try:
+                item = item[1]
+            except:
+                pass
+        itemString = "" 
+        number = str(item.properties['amount/\nlength'][0])
+        for key in keys:
+            itemString += str(item.properties[key][0])
+        CustomPdf_uniq(unique=str(item.unique), indent=str(item.indent),number=number, wholeString=itemString)    
+###########################################################################################################################              
+    class CustomPdf_indent:
+        customPdf = []
+        def __init__(self,unique, indent, wholeString, number):
+            self.unique = unique
+            self.indent =  indent 
+            self.number = number
+            self.wholeString = wholeString
+            CustomPdf_indent.customPdf.append(self)
+    for item in IndentPairs:
+
+        item = item[1]
+        itemString = "" 
+        number = str(item.properties['amount/\nlength'][0])
+        for key in keys:
+            itemString += str(item.properties[key][0])
+        CustomPdf_indent(unique=str(item.unique), indent=str(item.indent),number=number, wholeString=itemString)    
+###########################################################################################################################      
+    class CustomPdf_LeftOver2:
+        customPdf = []
+        def __init__(self,unique, indent, wholeString, number):
+            self.unique = unique
+            self.indent =  indent 
+            self.number = number
+            self.wholeString = wholeString
+            CustomPdf_LeftOver2.customPdf.append(self)           
+    for item in LeftOVer2:
+        itemString = "" 
+        number = str(item.properties['amount/\nlength'][0])
+        for key in keys:
+            itemString += str(item.properties[key][0])
+        CustomPdf_indent(unique=str(item.unique), indent=str(item.indent),number=number, wholeString=itemString)  
+###########################################################################################################################      
+#TODO:
+    """
+    class CustomPdf_duplicates:
+        customPdf = []
+        def __init__(self,unique, indent, wholeString, number):
+            self.unique = unique
+            self.indent =  indent 
+            self.number = number
+            self.wholeString = wholeString
+            CustomPdf_duplicates.customPdf.append(self)       
     
+    for item in duplicatePairsList:
+        #CustomPdf(unique=str(item.unique), indent=str(item.indent), wholeString=)
+        itemString = "" 
+        number = str(item.properties['amount/\nlength'][0])
+        for key in keys:
+            itemString += str(item.properties[key][0])
+        CustomPdf_duplicates(unique=str(item.unique), indent=str(item.indent),number=number, wholeString=itemString)
+    """    
+###########################################################################################################################   
+
+      
+        
     for location in [input1, input2]:
         Lang.set_lang(pd.read_excel(location).columns[0])
         
