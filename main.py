@@ -114,6 +114,16 @@ def HarvestData(input1, input2):
     Duplicate_list_1 = []
     for i, items11 in enumerate(Objects1.items):
             h= items11.unique
+            
+            
+            continueQ = False
+            for check in  Duplicate_list_1:
+                if items11.unique == check[0].unique:
+                    continueQ = True
+                    break
+                
+            if continueQ:
+                continue
             for j,items12 in enumerate(Objects1.items):
                 h2= items12.unique
                 breakbool = False
@@ -150,6 +160,15 @@ def HarvestData(input1, input2):
     Duplicate_list_2 = []
     for i, items11 in enumerate(Objects2.items):
             h= items11.unique
+            continueQ = False
+            for check in  Duplicate_list_2:
+                if items11.unique == check[0].unique:
+                    continueQ = True
+                    break
+                
+            if continueQ:
+                continue
+                    
             for j,items12 in enumerate(Objects2.items):
                 h2= items12.unique
                 breakbool = False
@@ -301,33 +320,9 @@ def HarvestData(input1, input2):
         def __init__(self):
             pass
 
-    Buffer_list1, Buffer_list2 = [], []
-    for item in DuplicateButOnlyList1: 
-        for item2 in DuplicateButOnlyList2 :
-            
-            if item.unique == item2.unique and item.indent == item2.indent:
-                if item not in Buffer_list1 and item2 not in Buffer_list2:
-                    DuplicatePairs.UniqAndIndentMatch.append([item, item2])
-                    Buffer_list1.append(item)
-                    Buffer_list2.append(item2)
-            elif item.unique == item2.unique:
-                if item not in Buffer_list1 and item2 not in Buffer_list2:
-                    DuplicatePairs.UniqMatch.append([item, item2])
-                    Buffer_list1.append(item)
-                    Buffer_list2.append(item2)
-            elif item.indent == item2.indent:
-                if item not in Buffer_list1 and item2 not in Buffer_list2:
-                    DuplicatePairs.IndentMatch.append([item, item2])
-                    Buffer_list1.append(item)
-                    Buffer_list2.append(item2)
-            else:
-                if item not in Buffer_list1 and item2 not in Buffer_list2:
-                    DuplicatePairs.NoMatch.append([item, item2])
-                    Buffer_list1.append(item)
-                    Buffer_list2.append(item2)
 
-            
-    duplicatePairsList = [DuplicatePairs.UniqAndIndentMatch, DuplicatePairs.UniqMatch, DuplicatePairs.IndentMatch, DuplicatePairs.NoMatch]
+              
+
     
     
     """  
@@ -345,5 +340,5 @@ def HarvestData(input1, input2):
     #5 List roztrizenych duplicit 
     [DuplicatePairs.UniqAndIndentMatch, DuplicatePairs.UniqMatch, DuplicatePairs.IndentMatch, DuplicatePairs.NoMatch]
     """
-    return [UniqAndIndentClass.UniqAndIndent,OnlyUniqPairs,OnlyIndentPairs, LeftOVer1, leftOver2, duplicatePairsList]
+    return [UniqAndIndentClass.UniqAndIndent,OnlyUniqPairs,OnlyIndentPairs, LeftOVer1, leftOver2, Duplicate_list_1,Duplicate_list_2 ]
 
