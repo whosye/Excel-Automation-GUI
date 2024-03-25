@@ -142,7 +142,6 @@ def HarvestData(input1, input2):
                         index.append(i)
                         index.append(j)
                         Duplicate_list_1.append([items11, items12])
-
                         print(f"Duplicate {items12.unique} {items11.unique}")
                         print(f"Duplicate {items12.indent} {items11.indent}")
 
@@ -311,34 +310,7 @@ def HarvestData(input1, input2):
     # Deleting indent matched objects from global list -> only no matching values left 
     LeftOVer1=  Objects1.items
     leftOver2 = Objects2.items
-    class DuplicatePairs: 
-        
-        UniqAndIndentMatch = []
-        UniqMatch = []
-        IndentMatch = []
-        NoMatch = [] 
-        def __init__(self):
-            pass
 
 
-              
-
-    
-    
-    """  
-    # Vystup 
-    #0 Par uniq indent 
-    UniqAndIndentClass.UniqAndIndent
-    #1 Par uniw
-    OnlyUniqPairs
-    #2 Par indent
-    OnlyIndentPairs
-    #3 Chybi v 1 
-    LeftOVer1
-    #4 Chybi ve 2 
-    leftOver2
-    #5 List roztrizenych duplicit 
-    [DuplicatePairs.UniqAndIndentMatch, DuplicatePairs.UniqMatch, DuplicatePairs.IndentMatch, DuplicatePairs.NoMatch]
-    """
     return [UniqAndIndentClass.UniqAndIndent,OnlyUniqPairs,OnlyIndentPairs, LeftOVer1, leftOver2, Duplicate_list_1,Duplicate_list_2 ]
 

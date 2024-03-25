@@ -12,7 +12,7 @@ def Start(input1, input2, html_report_path ):
     from tridy import Lang
     Output =HarvestData(input1=input1, input2=input2)
 
-    UniqAndIndent,UniqPairs,IndentPairs,LeftOVer1,LeftOVer2 ,duplicatePairsList = Output[0],Output[1], Output[2], Output[3], Output[4], Output[5]
+    UniqAndIndent,UniqPairs,IndentPairs,LeftOVer1,LeftOVer2 , Duplicate1, Duplicate2 = Output[0],Output[1], Output[2], Output[3], Output[4], Output[5], Output[6]
 
     #uniq_device_id   properties number[0] identnumber[0] description[0] additional[0] text[0] sipplioer[0] sipplier[0] material[0] 
     class CustomPdf_uniqAndIndet:
@@ -408,7 +408,7 @@ def Start(input1, input2, html_report_path ):
     html3 ="<table id='table3'>"  
     html3 +="<tr>\n"
     html3 +=f"<th class='LANG' data-lang-values={json.dumps(Origin_mark)}></th>\n"
-    html3 +=f"<th  class='LANG'data-lang-values={json.dumps(uniq_device)}></th>\n"
+    html3 +=f"<th class='LANG'data-lang-values={json.dumps(uniq_device)}></th>\n"
     html3 +=f"<th class='LANG'data-lang-values={json.dumps(indent)}></th>\n"        
     breakbool = False
 
@@ -454,179 +454,94 @@ def Start(input1, input2, html_report_path ):
                         break
     html3 += "</table>\n"    
 
-
-    html4 ="<table id='table4'>"  
-    html4 +="<tr>\n"      
-    breakbool = False
-    import numpy as np
-    try:
-        maxLen_list = [duplicatePairsList[0],duplicatePairsList[1],duplicatePairsList[2],duplicatePairsList[3]]
-        maxLen_arg = np.argmax(maxLen_list)
-    except:
-        maxLen_arg =0
-
-    if maxLen_list[maxLen_arg] != 0:
-
-        for i, item in enumerate(maxLen_list[maxLen_arg]):
-            if breakbool:
-                break
-            if i >1:
-                break
-            if i ==0:
-                html4 +=f"<th  class='LANG'data-lang-values={json.dumps(uniq_device)}></th>\n"
-                html4 +=f"<th class='LANG'data-lang-values={json.dumps(indent)}></th>\n"
-            for j, prop in enumerate(item[0].properties):
-                html4 +=f"<th>{prop}</th>\n"
-                if j == 10:
-                    breakbool = True
-                    break 
-        try:
-            html4 += "<tr>\n"  
-            for m in range(len(item.properties)+2):
-                html4 +=f"<th id='new'></th>\n"
-            html4 += "</tr>\n"      
-        except:
-            pass
-
-    #duplicatePairsList = [DuplicatePairs.UniqAndIndentMatch, DuplicatePairs.UniqMatch, DuplicatePairs.IndentMatch, DuplicatePairs.NoMatch]  
-    if len(duplicatePairsList[0]) != 0: 
-        for q, pair in enumerate(duplicatePairsList[0]): 
-            if len(pair) != 0:
-                item1, item2 =  pair[0], pair[1]
-                html4 += "<tr>\n"
-                if q ==0:
-                    html4 += "<tr>\n"  
-                    for m in range(len(item2.properties)+2):
-                        html4 +=f"<th id='new'></th>\n"
-                    html4 += "</tr>\n"
-                    
-                    
-                    for m in range(len(item2.properties)+2):
-                        if m == 0:
-                            html4 +=f"<th id='new' class='LANG' data-lang-values={json.dumps(UNIQandIND)}></th>\n"
-                        html4 +=f"<th></th>\n"
-                        
-                html4 += "</tr>\n"
-                html4 += "<tr>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.unique}</th>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.indent}</th>\n"
-                for it in item1.properties: 
-                    html4 +=f"<th>{item1.properties[it]}</th>\n"
-                html4 += "</tr>\n"
-                
-                html4 += "<tr>\n"
-                html4 +=f"<th id='duplicate2'>{item2.unique}</th>\n"
-                html4 +=f"<th id='duplicate2'>{item2.indent}</th>\n"
-                for it in item2.properties: 
-                    html4 +=f"<th>{item2.properties[it]}</th>\n"
-                html4 += "</tr>\n"
-
-            for m in range(len(item2.properties)+3):
-                html4 +=f"<th id='space'></th>\n"
-            html4 += "</tr>\n"
-            html4 += "<tr>\n"
-
+    html4 ="<table id='table4'>"   # Duplicate1 Old , Duplicate2 New 
+    html4 +="<tr>\n"
+    html4 +=f"<th class='LANG' data-lang-values={json.dumps(Origin_mark)}></th>\n"
+    html4 +=f"<th class='LANG'data-lang-values={json.dumps(uniq_device)}></th>\n"
+    html4 +=f"<th class='LANG'data-lang-values={json.dumps(indent)}></th>\n"        
+    for j, prop in enumerate(Object_Lang[0].items if initLang is not None else headers):
+        if initLang is not None:
+            html4 +=f"<th class='LANG' data-lang-values={prop[1]}></th>\n"
+        else:
+            html4 +=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+    html4 += "</tr>\n"
+    for items in Duplicate1: 
         html4 += "<tr>\n"  
-        for m in range(len(item2.properties)+2):
-            html4 +=f"<th id='new'></th>\n"
-        html4 += "</tr>\n"
-
-        for m in range(len(item2.properties)+2):
-            if m == 0:
-                html4 +=f"<th id='new' class='LANG' data-lang-values={json.dumps(UNIQmatch)}></th>\n"
-            html4 +=f"<th></th>\n"
+        html4 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n"
+        html4 +=f"<th class='matchId' >{items[0].unique}</th>\n"
+        html4 +=f"<th class='matchId' >{items[0].indent}</th>\n"
+        for key, val in items[0].properties.items():
+            html4 +=f"<th class='' >{val[0]}</th>\n"
+            
+        
         html4 += "</tr>\n"
         
-    if len(duplicatePairsList[1]) != 0:
-        for pair in duplicatePairsList[1]: 
-            if len(pair) != 0:
-                item1, item2 =  pair[0], pair[1]
-                html4 += "<tr>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.unique}</th>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.indent}</th>\n"
-                for it in item1.properties: 
-                    html4 +=f"<th>{item1.properties[it]}</th>\n"
-                html4 += "</tr>\n"
-                
-                html4 += "<tr>\n"
-                html4 +=f"<th id='duplicate2'>{item2.unique}</th>\n"
-                html4 +=f"<th id='duplicate2'>{item2.indent}</th>\n"
-                for it in item2.properties: 
-                    html4 +=f"<th>{item2.properties[it]}</th>\n"
-                    
-                html4 += "</tr>\n" 
-            for m in range(len(item2.properties)+3):
-                html4 +=f"<th id='space'></th>\n"
-            html4 += "</tr>\n"
-            
         html4 += "<tr>\n"  
-        for m in range(len(item2.properties)+2):
-            html4 +=f"<th id='new'></th>\n"
+        html4 +=f"<th class='LANG' data-lang-values={json.dumps(OLD_mark)}></th>\n"
+        html4 +=f"<th class='matchId' >{items[1].unique}</th>\n"
+        html4 +=f"<th class='matchId' >{items[1].indent}</th>\n"
+        for key, val in items[1].properties.items():
+            html4 +=f"<th class='' >{val[0]}</th>\n"
         html4 += "</tr>\n"
-
-        html4 += "<tr>\n"
-        for m in range(len(item2.properties)+2):
-            if m == 0:
-                html4 +=f"<th id='new' class='LANG' data-lang-values={json.dumps(INDmatch)}></th>\n"
-            html4 +=f"<th></th>\n"
+        html4 += "<tr>\n"  
+        for m in range(len(items[0].properties)+3):
+            html4 +=f"<th id='space'></th>\n"
         html4 += "</tr>\n"
         
-    if len(duplicatePairsList[2]) != 0:
-        for pair in duplicatePairsList[2]: 
-            if len(pair) != 0:
-                item1, item2 =  pair[0], pair[1]
-                html4 += "<tr>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.unique}</th>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.indent}</th>\n"
-                for it in item1.properties: 
-                    html4 +=f"<th>{item1.properties[it]}</th>\n"
-                html4 += "</tr>\n"
-                
-                html4 += "<tr>\n"
-                html4 +=f"<th id='duplicate2'>{item2.unique}</th>\n"
-                html4 +=f"<th id='duplicate2'>{item2.indent}</th>\n"
-                for it in item2.properties: 
-                    html4 +=f"<th>{item2.properties[it]}</th>\n"
-                html4 += "</tr>\n" 
-            for m in range(len(item2.properties)+3):
-                html4 +=f"<th id='space'></th>\n"
-            html4 += "</tr>\n"
-            
-        html4 += "<tr>\n"  
-        for m in range(len(item2.properties)+2):
-            html4 +=f"<th id='new'></th>\n"
-        html4 += "</tr>\n"
-            
-        html4 += "<tr>\n"
-        for m in range(len(item2.properties)+2):
-            if m == 0:
-                html4 +=f"<th id='new' class='LANG' data-lang-values={json.dumps(Nomatch)}></th>\n"
-            html4 +=f"<th></th>\n"
-        html4 += "</tr>\n"
+    html4 += "</table>\n"  
+    
+    html41 ="<table id='table41'>"   # Duplicate1 Old , Duplicate2 New 
+    html41 +="<tr>\n"
+    html41 +=f"<th class='LANG' data-lang-values={json.dumps(Origin_mark)}></th>\n"
+    html41 +=f"<th class='LANG'data-lang-values={json.dumps(uniq_device)}></th>\n"
+    html41 +=f"<th class='LANG'data-lang-values={json.dumps(indent)}></th>\n"        
+    for j, prop in enumerate(Object_Lang[0].items if initLang is not None else headers):
+        if initLang is not None:
+            html41 +=f"<th class='LANG' data-lang-values={prop[1]}></th>\n"
+        else:
+            html41 +=f"<th class='LANG' data-lang-values={json.dumps(prop)}></th>\n"
+    html41 += "</tr>\n"
+    for items in Duplicate2: 
+        html41 += "<tr>\n"  
+        html41 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n"
+        html41 +=f"<th class='matchId' >{items[0].unique}</th>\n"
+        html41 +=f"<th class='matchId' >{items[0].indent}</th>\n"
+        for key, val in items[0].properties.items():
+            html41 +=f"<th class='' >{val[0]}</th>\n"
+        html41 += "</tr>\n"
         
-    if len(duplicatePairsList[3]) != 0:
-        for pair in duplicatePairsList[3]: 
-            if len(pair) != 0:
-                item1, item2 =  pair[0], pair[1]
-                html4 += "<tr>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.unique}</th>\n"
-                html4 +=f"<th class='noIDorUNQ'>{item1.indent}</th>\n"
-                for it in item1.properties: 
-                    html4 +=f"<th>{item1.properties[it]}</th>\n"
-                html4 += "</tr>\n"
-                
-                html4 += "<tr>\n"
-                html4 +=f"<th id='duplicate2'>{item2.unique}</th>\n"
-                html4 +=f"<th id='duplicate2'>{item2.indent}</th>\n"
-                for it in item2.properties: 
-                    html4 +=f"<th>{item2.properties[it]}</th>\n"
-                html4 += "</tr>\n" 
-                
-            for m in range(len(item2.properties)+3):
-                html4 +=f"<th id='space'></th>\n"
-            html4 += "</tr>\n"
-
-    html4 += "</table>\n"     
+        html41 += "<tr>\n"  
+        html41 +=f"<th class='LANG' data-lang-values={json.dumps(NEW_mark)}></th>\n"
+        html41 +=f"<th class='matchId' >{items[1].unique}</th>\n"
+        html41 +=f"<th class='matchId' >{items[1].indent}</th>\n"
+        for key, val in items[1].properties.items():
+            html41 +=f"<th class='' >{val[0]}</th>\n"
+        html41 += "</tr>\n"
+        html41 += "<tr>\n"  
+        for m in range(len(items[0].properties)+3):
+            html41 +=f"<th id='space'></th>\n"
+        html41 += "</tr>\n"
+    html41 += "</table>\n"  
+        
+    
+    
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
         
 
     html5 ="<table id='table5'>"  
@@ -1311,6 +1226,11 @@ def Start(input1, input2, html_report_path ):
             <hr>
             <h2 for='table4' class='LANG' data-lang-values={json.dumps(DUPLICATES_mark)}></h2>
             {html4}
+            <br>
+            <hr>
+            <h2 for='table41' class='LANG' data-lang-values={json.dumps(DUPLICATES_mark)}></h2>
+            {html41}
+            
             <br>
             <hr>
             <h2 for='table5' class='LANG' data-lang-values={json.dumps(Notfound)}></h2>
